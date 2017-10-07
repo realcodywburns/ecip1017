@@ -3,20 +3,20 @@
 var uri = 'https://mewapi.epool.io';
 var web3 = new Web3(new Web3.providers.HttpProvider(uri));
 var  currentblk = web3.eth.blockNumber;
-var timeRemains = (5000000 - currentblk) * 14.5;
+var timeRemains = (5000001 - currentblk) * 14.5;
 var countDownDate = (timeRemains*1000 )  + 604800 + new Date().getTime();
-var progress = (100-((5000000 - currentblk) / 5000000) * 100);
+var progress = (100-((5000001 - currentblk) / 5000000) * 100);
 var real = new Date(countDownDate);
 
 
 document.getElementById("realDate").innerHTML =  formatDate(real);
 
-if(currentblk < 5000000){var currentEra = 5000000}
+if(currentblk <= 5000000){var currentEra = 5000000}
 
 function doGetBlk() {
  currentblk = web3.eth.blockNumber;
- timeRemains = (5000000 - currentblk) * 14.25;
- progress = (100-((5000000 - currentblk) / 5000000) * 100);
+ timeRemains = (5000001 - currentblk) * 14.25;
+ progress = (100-((5000001 - currentblk) / 5000000) * 100);
  $('#currentBlock').html(currentblk+"/"+currentEra);
  document.getElementById('era-1').style.width = progress+"%";
 
@@ -65,7 +65,7 @@ function formatDate(date) {
   ];
   var dayNames = [
     "Sunday [星期天]",
-    "Monday [星期]",
+    "Monday [星期一]",
     "Tuesday [星期二]",
     "Wednesday [星期三]",
     "Thursday [星期四]",
