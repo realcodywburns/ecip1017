@@ -1,4 +1,4 @@
-﻿// basic information about the dapp
+// basic information about the dapp
 
 var uri = 'https://mewapi.epool.io';
 var web3 = new Web3(new Web3.providers.HttpProvider(uri));
@@ -64,7 +64,14 @@ window.onload = function() {
 
 
 
-  
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    	clearInterval(x);
+    	document.getElementById("demo").innerHTML = "Processing";
+  	}
+	}, 1000);
+
+};
 
 function formatDate(date) {
   var monthNames = [
