@@ -1,25 +1,42 @@
-// basic information about the dapp
+﻿// basic information about the dapp
 
 var uri = 'https://mewapi.epool.io';
 var web3 = new Web3(new Web3.providers.HttpProvider(uri));
-var  currentblk = web3.eth.blockNumber;
-var timeRemains = (5000001 - currentblk) * 14.5;
+var currentblk = web3.eth.blockNumber;
+
+if(currentblk <= 5000000) {
+    var currentEra = 5000000;
+    var timeRemains = (5000000 - currentblk) * 14.5;
+  }
+if (currentblk >= 5000000){
+    var currentEra = 10000000;
+    var timeRemains = (10000000 - currentblk) * 14.5;
+    document.getElementById("era2-block").style.visibility = "visible";
+}
 var countDownDate = (timeRemains*1000 )  + 604800 + new Date().getTime();
 var progress = (100-((5000001 - currentblk) / 5000000) * 100);
 var real = new Date(countDownDate);
-
-
 document.getElementById("realDate").innerHTML =  formatDate(real);
 
-if(currentblk <= 5000000){var currentEra = 5000000}
-
 function doGetBlk() {
+
+//setup vars
  currentblk = web3.eth.blockNumber;
- timeRemains = (5000001 - currentblk) * 14.25;
- progress = (100-((5000001 - currentblk) / 5000000) * 100);
- $('#currentBlock').html(currentblk+"/"+currentEra);
+ //var currentblk = 7000000;
+ //var currentEra = 10000000;
+
+ timeRemains = (currentEra - currentblk) * 14.25;
+//first era stuff
+ progress = (100-((5000000 - currentblk) / 5000000) * 100);
+ if(currentEra < 5000001){$('#currentBlock').html(currentblk+"/"+5000001);
+ } else {$('#currentBlock').html(5000001 +"/"+5000001);}
  document.getElementById('era-1').style.width = progress+"%";
 
+ //second era stuffs
+ progress2 = (100-(((10000000 + 1) - (currentblk - 5000000)) / 10000000) * 100);
+ if(currentEra < 10000001){$('#currentBlock2').html((currentblk-5000000) + "/" + 10000000);;
+} else {$('#currentBlock').html(10000001 +"/"+10000001);}
+ document.getElementById('era-2').style.width = progress2+"%";
 }
 
 window.onload = function() {
@@ -47,14 +64,7 @@ window.onload = function() {
 
 
 
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    	clearInterval(x);
-    	document.getElementById("demo").innerHTML = "Processing";
-  	}
-	}, 1000);
-
-};
+  
 
 function formatDate(date) {
   var monthNames = [
