@@ -42,7 +42,7 @@ function doGetBlk() {
    document.getElementById('era-1').style.width = progress+"%";
 
    //second era stuffs
-   progress2 =  100 - (  (10000000 + 1 ) - (currentblk / 10000000) * 100) ;
+   progress2 =  100 - ( 10000001 - currentblk / 10000000  * 100) ;
    if(currentEra < 10000001){
 	      $('#currentBlock2').html(currentblk + "/" + 10000000);;
    } else {
