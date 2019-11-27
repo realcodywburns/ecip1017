@@ -1,5 +1,5 @@
 // basic information about the dapp
-var Web3 = require("./web3.min.js");
+import * as Web3 from "./web3.min.js";
 var uri = 'https://www.ethercluster.com/etc';
 var web3 = new Web3(new Web3.providers.HttpProvider(uri));
 var currentblk = web3.eth.blockNumber;
