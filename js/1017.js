@@ -4,12 +4,12 @@ var web3 = new Web3(new Web3.providers.HttpProvider(uri));
 var currentblk = 8675309;
 if ( currentblk <= 5000000 ) {
     var currentEra = 5000000;
-    var timeRemains = (5000000 - currentblk) * 14.5;
+    var timeRemains = (5000000 - currentblk) * 12;
   }
 
 if (currentblk >= 5000000){
     var currentEra = 10000000;
-    var timeRemains = (10000000 - currentblk) * 14.5;
+    var timeRemains = (10000000 - currentblk) * 12;
     document.getElementById("era2-block").style.visibility = "visible";
 }
 
@@ -29,7 +29,7 @@ async function doGetBlk() {
    //var currentEra = 10000000;
    
     // average blocktime is 14 secs
-   timeRemains = (currentEra - currentblk) * 14.25;
+   timeRemains = (currentEra - currentblk) * 12;
    
   //first era stuff
    progress = (100-((5000000 - currentblk) / 5000000) * 100);
