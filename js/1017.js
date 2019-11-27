@@ -1,6 +1,6 @@
 // basic information about the dapp
 
-var uri = 'https://etc-parity.0xinfra.com/';
+var uri = 'https://www.ethercluster.com/etc';
 var web3 = new Web3(new Web3.providers.HttpProvider(uri));
 var currentblk = web3.eth.blockNumber;
 
