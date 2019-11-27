@@ -1,8 +1,7 @@
 // basic information about the dapp
 var uri = 'https://www.ethercluster.com/etc';
 var web3 = new Web3(new Web3.providers.HttpProvider(uri));
-var currentblk = web3.eth.blockNumber;
-
+var currentblk = 8675309;
 if ( currentblk <= 5000000 ) {
     var currentEra = 5000000;
     var timeRemains = (5000000 - currentblk) * 14.5;
@@ -21,10 +20,10 @@ var real = new Date(countDownDate);
 document.getElementById("realDate").innerHTML =  formatDate(real);
 
 //setup the progress bars
-function doGetBlk() {
+async function doGetBlk() {
 
    //get the current block from the web3 provider
-   currentblk = web3.eth.blockNumber;
+   currentblk = await web3.eth.getBlockNumber();
    //var currentblk = 7000000;
    //var currentEra = 10000000;
    
