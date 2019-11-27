@@ -23,8 +23,9 @@ document.getElementById("realDate").innerHTML =  formatDate(real);
 async function doGetBlk() {
 
    //get the current block from the web3 provider
-   currentblk = await web3.eth.getBlockNumber();
-   //var currentblk = 7000000;
+   var getblk = await fetch("https://blockscout.com/etc/mainnet/api/?module=block&action=eth_block_number");
+   currentblk = getblk.response;
+	//var currentblk = 7000000;
    //var currentEra = 10000000;
    
     // average blocktime is 14 secs
