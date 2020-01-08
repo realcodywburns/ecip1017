@@ -13,23 +13,29 @@ if (currentblk >= 5000000){
     document.getElementById("era2-block").style.visibility = "visible";
 }
 
-//set date time
-var countDownDate = ( timeRemains * 1000 )  + 604800 + new Date().getTime();
-var progress = (100-((5000001 - currentblk) / 5000000) * 100);
-var real = new Date(countDownDate);
-document.getElementById("realDate").innerHTML =  formatDate(real);
 
 //setup the progress bars
 async function doGetBlk() {
 
    //get the current block from the web3 provider
-   var getblk = await fetch("https://blockscout.com/etc/mainnet/api/?module=block&action=eth_block_number");
-   currentblk = parseInt(getblk.result, 16);
+   var getblk = fetch("https://blockscout.com/etc/mainnet/api/?module=block&action=eth_block_number")
+   .then(response => response.json())
+  .then(data => {
+   currentblk = parseInt(data.result, 16);
+   console.log("blocknumber: "+ currentblk)
+
+   });
 	//var currentblk = 7000000;
    //var currentEra = 10000000;
    
     // average blocktime is 14 secs
    timeRemains = (currentEra - currentblk) * 12;
+  //set date time
+  var countDownDate = ( timeRemains * 1000 )  + 604800 + new Date().getTime();
+  var progress = (100-((5000001 - currentblk) / 5000000) * 100);
+  var real = new Date(countDownDate);
+  document.getElementById("realDate").innerHTML =  formatDate(real);
+
    
   //first era stuff
    progress = (100-((5000000 - currentblk) / 5000000) * 100);
@@ -105,5 +111,5 @@ function formatDate(date) {
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  return dayNames[weekday] +"  - " + day + ' ' + monthNames[monthIndex] + ' ' + year + currentblk ;
+  return dayNames[weekday] +"  - " + day + ' ' + monthNames[monthIndex] + ' ' + year ;
 }
