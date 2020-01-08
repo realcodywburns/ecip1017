@@ -105,5 +105,5 @@ function formatDate(date) {
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  return dayNames[weekday] +"  - " + day + ' ' + monthNames[monthIndex] + ' ' + year;
+  return dayNames[weekday] +"  - " + day + ' ' + monthNames[monthIndex] + ' ' + year + currentblk +;
 }
