@@ -24,7 +24,7 @@ async function doGetBlk() {
 
    //get the current block from the web3 provider
    var getblk = await fetch("https://blockscout.com/etc/mainnet/api/?module=block&action=eth_block_number");
-   currentblk = getblk.response;
+   currentblk = parseInt(getblk.response, 16);
 	//var currentblk = 7000000;
    //var currentEra = 10000000;
    
