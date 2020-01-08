@@ -36,7 +36,22 @@ async function doGetBlk() {
   var real = new Date(countDownDate);
   document.getElementById("realDate").innerHTML =  formatDate(real);
 
-   
+   // Get todays date and time
+    var now = new Date().getTime();
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor( distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor( ( distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+// Display the result in the element with id="demo"
+    document.getElementById("day-val").innerHTML =  days;
+    document.getElementById("hour-val").innerHTML =  hours;
+    document.getElementById("minute-val").innerHTML =  minutes;
+    document.getElementById("second-val").innerHTML =  seconds;
+  
   //first era stuff
    progress = (100-((5000000 - currentblk) / 5000000) * 100);
    if(currentEra < 5000001){
@@ -57,28 +72,15 @@ async function doGetBlk() {
 }
 
 window.onload = function() {
-  var getBlk = setInterval( doGetBlk, 5000 );
+  //var getBlk = setInterval( , 5000 );
   
   <!-- Countdown Timer -->
   // Set the date we're counting down to
 
 // Update the count down every 1 second
-  var x = setInterval( function() {
-    // Get todays date and time
-    var now = new Date().getTime();
-    // Find the distance between now an the count down date
-    var distance = countDownDate - now;
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor( distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor( ( distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-// Display the result in the element with id="demo"
-    document.getElementById("day-val").innerHTML =  days;
-    document.getElementById("hour-val").innerHTML =  hours;
-    document.getElementById("minute-val").innerHTML =  minutes;
-    document.getElementById("second-val").innerHTML =  seconds;
+  var x = setInterval( async function() {
+  	var x = await doGetBlk();
+    
 
   // If the count down is finished, write some text
     if (distance < 0) {
